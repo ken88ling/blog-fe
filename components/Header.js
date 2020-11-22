@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Link from 'next/link';
-import Router from 'next/router';
-import NProgress from 'nprogress';
-import { APP_NAME } from '../config';
-import { signout, isAuth } from '../actions/auth';
+import React, { useState } from 'react'
+import Link from 'next/link'
+import Router from 'next/router'
+import NProgress from 'nprogress'
+import { APP_NAME } from '../config'
+import { signout, isAuth } from '../actions/auth'
 import {
   Collapse,
   Navbar,
@@ -15,23 +15,24 @@ import {
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
-} from 'reactstrap';
-import Search from './blog/Search';
+  DropdownItem,
+} from 'reactstrap'
+import Search from './blog/Search'
 
-Router.onRouteChangeStart = url => NProgress.start();
-Router.onRouteChangeComplete = url => NProgress.done();
-Router.onRouteChangeError = url => NProgress.done();
+Router.onRouteChangeStart = (url) => NProgress.start()
+Router.onRouteChangeComplete = (url) => NProgress.done()
+Router.onRouteChangeError = (url) => NProgress.done()
 
 const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   const toggle = () => {
-    setIsOpen(!isOpen);
-  };
+    setIsOpen(!isOpen)
+  }
 
+  console.log('is auth', isAuth())
   return (
-    <React.Fragment>
+    <>
       <Navbar color="light" light expand="md">
         <Link href="/">
           <NavLink className="font-weight-bold">{APP_NAME}</NavLink>
@@ -53,44 +54,47 @@ const Header = () => {
               </NavItem>
             </React.Fragment>
 
-            {!isAuth() && (
-              <React.Fragment>
-                <NavItem>
-                  <Link href="/signin">
-                    <NavLink>Signin</NavLink>
-                  </Link>
-                </NavItem>
-                <NavItem>
-                  <Link href="/signup">
-                    <NavLink>Signup</NavLink>
-                  </Link>
-                </NavItem>
-              </React.Fragment>
-            )}
+            {/*{!isAuth() && (*/}
+            {/*  <React.Fragment>*/}
+            {/*    <NavItem>*/}
+            {/*      <Link href="/signin">*/}
+            {/*        <NavLink>Signin</NavLink>*/}
+            {/*      </Link>*/}
+            {/*    </NavItem>*/}
+            {/*    <NavItem>*/}
+            {/*      <Link href="/signup">*/}
+            {/*        <NavLink>Signup</NavLink>*/}
+            {/*      </Link>*/}
+            {/*    </NavItem>*/}
+            {/*  </React.Fragment>*/}
+            {/*)}*/}
 
-            {isAuth() && isAuth().role === 0 && (
-              <NavItem>
-                <Link href="/user">
-                  <NavLink>{`${isAuth().name}'s Dashboard`}</NavLink>
-                </Link>
-              </NavItem>
-            )}
+            {/*{isAuth() && isAuth().role === 0 && (*/}
+            {/*  <NavItem>*/}
+            {/*    <Link href="/user">*/}
+            {/*      <NavLink>{`${isAuth().name}'s Dashboard`}</NavLink>*/}
+            {/*    </Link>*/}
+            {/*  </NavItem>*/}
+            {/*)}*/}
 
-            {isAuth() && isAuth().role === 1 && (
-              <NavItem>
-                <Link href="/admin">
-                  <NavLink>{`${isAuth().name}'s Dashboard`}</NavLink>
-                </Link>
-              </NavItem>
-            )}
+            {/*{isAuth() && isAuth().role === 1 && (*/}
+            {/*  <NavItem>*/}
+            {/*    <Link href="/admin">*/}
+            {/*      <NavLink>{`${isAuth().name}'s Dashboard`}</NavLink>*/}
+            {/*    </Link>*/}
+            {/*  </NavItem>*/}
+            {/*)}*/}
 
-            {isAuth() && (
-              <NavItem>
-                <NavLink style={{ cursor: 'pointer' }} onClick={() => signout(() => Router.replace(`/signin`))}>
-                  Signout
-                </NavLink>
-              </NavItem>
-            )}
+            {/*{isAuth() && (*/}
+            {/*  <NavItem>*/}
+            {/*    <NavLink*/}
+            {/*      style={{ cursor: 'pointer' }}*/}
+            {/*      onClick={() => signout(() => Router.replace(`/signin`))}*/}
+            {/*    >*/}
+            {/*      Signout*/}
+            {/*    </NavLink>*/}
+            {/*  </NavItem>*/}
+            {/*)}*/}
 
             <NavItem>
               <a href="/user/crud/blog" className="btn btn-primary text-light">
@@ -101,8 +105,8 @@ const Header = () => {
         </Collapse>
       </Navbar>
       <Search />
-    </React.Fragment>
-  );
-};
+    </>
+  )
+}
 
-export default Header;
+export default Header

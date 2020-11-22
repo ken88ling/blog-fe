@@ -1,20 +1,15 @@
-// import App from 'next/app'
-import '../node_modules/nprogress/nprogress.css';
+import '../node_modules/nprogress/nprogress.css'
+import React from 'react'
 
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />;
+function App({ Component, pageProps }) {
+  return <Component {...pageProps} />
 }
 
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-// //
-// MyApp.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
+App.getInitialProps = async ({ Component, ctx }) => {
+  const pageProps = Component.getInitialProps
+    ? await Component.getInitialProps(ctx)
+    : {}
+  return { pageProps }
+}
 
-//   return { ...appProps };
-// };
-
-export default MyApp;
+export default App

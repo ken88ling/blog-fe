@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import Router from 'next/router';
 import GoogleLogin from 'react-google-login';
 import { loginWithGoogle, authenticate, isAuth } from '../../actions/auth';
@@ -12,7 +12,7 @@ const LoginGoogle = () => {
         const user = { tokenId };
 
         loginWithGoogle(user).then(data => {
-            if (data.error) {
+            if (data?.error) {
                 console.log(data.error);
             } else {
                 authenticate(data, () => {
